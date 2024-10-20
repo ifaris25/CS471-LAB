@@ -66,4 +66,5 @@ def search(request):
                 contained = True
             if contained: 
                 newBooks.append(item)
-    return render(request, "bookmodule/bookList.html",{'books':newBooks})
+        return render(request, "bookmodule/bookList.html",{'books':newBooks})
+    return render(request, "layouts/base.html")
