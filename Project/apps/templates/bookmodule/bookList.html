@@ -1,5 +1,9 @@
 
-<table border="1" cellpadding="5" cellspacing="0">>
+{% extends "layouts/base.html" %}
+{% block content %}
+
+<h1>Serach Results</h1>
+<table border="1" cellpadding="5" cellspacing="0">
     <tr>
         <th>title</th>
         <th>author</th>
@@ -27,6 +31,7 @@
 </tr>
 {% endif %}
 </table>
+{% endblock content %}
 
 
 

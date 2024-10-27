@@ -3,8 +3,11 @@
 {% comment %} {% extends "layouts/base.html" %} {% endcomment %}
 {% load static %}
 
+
+<header>{% include "includes/header.html" %}</header>
+
 <head>
-    {% block title %} Searching Page {% endblock title %}
+    {% comment %} {% block title %} Searching Page {% endblock title %} {% endcomment %}
     <meta name="keywords" content="Books, recent, Learning, library">
     <meta name="description" content="Books website">
     <meta name="author" content="author name">
