@@ -109,3 +109,20 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+.button {
+    display: inline-block;
+    padding: 10px 20px; /* Adjust for desired size */
+    color: #fff; /* Text color */
+    background-color: #007bff; /* Background color */
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners */
+    border: none; /* Optional border */
+    font-size: 16px; /* Font size */
+    text-align: center; /* Center text */
+    cursor: pointer; /* Pointer cursor for interactivity */
+  }
+  
+  .button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+  
