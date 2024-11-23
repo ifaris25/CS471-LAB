@@ -19,6 +19,7 @@
             <th>Edition</th>
             <th></th>
             <th></th>
+            <th></th>
             
         </tr>
 
@@ -29,6 +30,7 @@
                 <td>{{book.price}}</td>
                 <td>{{book.edition}}</td>
                 <td><a href="{% url 'books.editbook' book.id %}" class="button" >Edit</a></td>
+                <td><a href="{% url 'books.editBookByForm' book.id %}" class="button" >Edit FORM</a></td>
                 <td><a href="{% url 'books.deleteBook' book.id %}"  class="button" >Delete</a></td>
 
             </tr>

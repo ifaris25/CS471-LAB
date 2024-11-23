@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.db.models import Q
 from django.db.models import Avg, Max, Min, Sum, Count
+from apps.bookmodule.forms import BookForm
 
 
 from .models import *
@@ -146,6 +147,18 @@ def addbook(request):
         
     return render(request,'bookmodule/addbook.html')
 
+def addBookByForm(request):
+    form = BookForm()
+    if request.method=='POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('books.listbooks')
+    return render(request,'bookmodule/addBookByForm.html',{'form':form})
+
+
+           
+    
 
 
 def editbook(request,bID):
@@ -162,6 +175,17 @@ def editbook(request,bID):
         book.save()
         return redirect('books.listbooks')
     return render(request,'bookmodule/editbook.html',{'book':book})
+
+
+def editBookByForm(request,bID):
+    book = Book.objects.get(id=bID)
+    if request.method=='POST':
+        form = BookForm(request.POST,instance=book)
+        if form.is_valid:
+            form.save()
+        return redirect('books.listbooks')
+    form = BookForm(instance=book)
+    return render(request,'bookmodule/addBookByForm.html',{'form':form})
 
 
 def deleteBook(request,bID):

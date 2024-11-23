@@ -23,5 +23,7 @@ urlpatterns = [
     path('lab9_part1/addbook', views.addbook, name= "books.addbook"),
     path('lab9_part1/editbook/<bID>', views.editbook, name= "books.editbook"),
     path('lab9_part1/deleteBook/<bID>', views.deleteBook, name= "books.deleteBook"),
+    path('lab9_part2/addBookByForm', views.addBookByForm, name= "books.addBookByForm"),
+    path('lab9_part2/editBookByForm/<bID>', views.editBookByForm, name= "books.editBookByForm"),
     
 ]
