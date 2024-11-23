@@ -27,3 +27,8 @@ class Student2(models.Model):
     name = models.CharField(max_length=50)
     age = models.IntegerField()
     addresses  = models.ManyToManyField(Address)
+    
+    
+class BookCover(models.Model):
+    title = models.CharField(max_length = 50)
+    coverPage = models.ImageField(upload_to='documents/')

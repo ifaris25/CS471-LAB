@@ -1,5 +1,5 @@
 from django import forms
-from apps.bookmodule.models import Book,Student,Address,Student2
+from apps.bookmodule.models import Book,Student,Address,Student2,BookCover
 
 class BookForm(forms.ModelForm):
     class Meta:
@@ -35,4 +35,12 @@ class StudentForm2(forms.ModelForm):
     addresses=forms.ModelMultipleChoiceField(label='City',queryset=Address.objects.all(),required=True, widget=forms.CheckboxSelectMultiple())
         
         
-        
+
+
+class BookCoverForm(forms.ModelForm):
+    class Meta:
+        model= BookCover
+        fields='__all__'
+        exclude = []
+    title = forms.CharField(max_length=100,label='Name',required=True,widget=forms.TextInput())
+    coverPage = forms.ImageField(label='Cover Page',required=True,widget=forms.ClearableFileInput() )

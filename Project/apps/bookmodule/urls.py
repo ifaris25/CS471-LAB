@@ -34,5 +34,7 @@ urlpatterns = [
     path('lab10/listStudentM', views.listStudent2, name= "students.listStudent2"),
     path('lab10/deleteStudentM/<bID>', views.deleteStudent2, name= "students.deleteStudent2"),
     path('lab10/editStudentM/<bID>', views.editStudent2, name= "students.editStudent2"),
+    path('lab10/addBookWithCover', views.addBookWithCover, name= "books.addBookWithCover"),
+
     
 ]

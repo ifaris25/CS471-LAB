@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.db.models import Q
 from django.db.models import Avg, Max, Min, Sum, Count
-from apps.bookmodule.forms import BookForm,StudentForm,StudentForm2
+from apps.bookmodule.forms import BookForm,StudentForm,StudentForm2,BookCoverForm
 
 
 from .models import *
@@ -237,7 +237,7 @@ def listStudent2(request):
 def addStudent2(request):
     if request.method=='POST':
         form=StudentForm2(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
             return redirect('students.listStudent2')
     else:
@@ -250,7 +250,7 @@ def editStudent2(request,bID):
     student = Student2.objects.get(id=bID)
     if request.method=='POST':
         form = StudentForm2(request.POST,instance=student)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
             return redirect('students.listStudent2')
     form = StudentForm2(instance=student)
@@ -262,3 +262,17 @@ def deleteStudent2(request,bID):
     student.delete()
     return redirect('students.listStudent2')
     
+    
+    
+def addBookWithCover(request):
+    if request.method=='POST':
+        form = BookCoverForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            books =BookCover.objects.all()
+            return render(request,'bookmodule/listBooksCovers.html',{'books':books})
+        else:
+            print(form.errors)
+        
+    form = BookCoverForm(None)
+    return render(request,'bookmodule/addbookcover.html',{'form':form})
