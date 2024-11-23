@@ -30,4 +30,9 @@ urlpatterns = [
     path('lab10/deleteStudent<bID>', views.deleteStudent, name= "students.deleteStudent"),
     path('lab10/editStudent<bID>', views.editStudent, name= "students.editStudent"),
     
+    path('lab10/addStudentM', views.addStudent2, name= "students.addStudent2"),
+    path('lab10/listStudentM', views.listStudent2, name= "students.listStudent2"),
+    path('lab10/deleteStudentM/<bID>', views.deleteStudent2, name= "students.deleteStudent2"),
+    path('lab10/editStudentM/<bID>', views.editStudent2, name= "students.editStudent2"),
+    
 ]

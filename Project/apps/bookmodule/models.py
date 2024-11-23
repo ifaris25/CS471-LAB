@@ -20,3 +20,10 @@ class Student(models.Model):
     age = models.IntegerField()
     adress = models.ForeignKey(Address,on_delete=models.CASCADE)
     
+    
+    
+  
+class Student2(models.Model):
+    name = models.CharField(max_length=50)
+    age = models.IntegerField()
+    addresses  = models.ManyToManyField(Address)

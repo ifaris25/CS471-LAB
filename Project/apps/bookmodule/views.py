@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.db.models import Q
 from django.db.models import Avg, Max, Min, Sum, Count
-from apps.bookmodule.forms import BookForm,StudentForm
+from apps.bookmodule.forms import BookForm,StudentForm,StudentForm2
 
 
 from .models import *
@@ -229,4 +229,36 @@ def deleteStudent(request,bID):
     
 
 
+
+def listStudent2(request):
+    students =Student2.objects.all()
+    return render(request,'bookmodule/listStudentM.html',{'students':students})      
+        
+def addStudent2(request):
+    if request.method=='POST':
+        form=StudentForm2(request.POST)
+        if form.is_valid:
+            form.save()
+            return redirect('students.listStudent2')
+    else:
+        form=StudentForm2()
+        return render(request,'bookmodule/addStudent.html',{'form':form})
+        
+        
+
+def editStudent2(request,bID):
+    student = Student2.objects.get(id=bID)
+    if request.method=='POST':
+        form = StudentForm2(request.POST,instance=student)
+        if form.is_valid:
+            form.save()
+            return redirect('students.listStudent2')
+    form = StudentForm2(instance=student)
+    return render(request,'bookmodule/addStudent.html',{'form':form})
+    
+            
+def deleteStudent2(request,bID):
+    student = Student2.objects.get(id=bID)
+    student.delete()
+    return redirect('students.listStudent2')
     
