@@ -2,7 +2,9 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.db.models import Q
 from django.db.models import Avg, Max, Min, Sum, Count
-from apps.bookmodule.forms import BookForm,StudentForm,StudentForm2,BookCoverForm
+from apps.bookmodule.forms import *
+from django.contrib.auth import login,logout,authenticate
+from django.contrib import messages
 
 
 from .models import *
@@ -231,36 +233,48 @@ def deleteStudent(request,bID):
 
 
 def listStudent2(request):
-    students =Student2.objects.all()
-    return render(request,'bookmodule/listStudentM.html',{'students':students})      
+    if request.user.is_authenticated:
+        students =Student2.objects.all()
+        return render(request,'bookmodule/listStudentM.html',{'students':students})
+    else:
+        return redirect(register)      
         
 def addStudent2(request):
-    if request.method=='POST':
-        form=StudentForm2(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('students.listStudent2')
+    if request.user.is_authenticated:
+        if request.method=='POST':
+            form=StudentForm2(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('students.listStudent2')
+        else:
+            form=StudentForm2()
+            return render(request,'bookmodule/addStudent.html',{'form':form})
     else:
-        form=StudentForm2()
-        return render(request,'bookmodule/addStudent.html',{'form':form})
+        return redirect(register)      
         
         
 
 def editStudent2(request,bID):
-    student = Student2.objects.get(id=bID)
-    if request.method=='POST':
-        form = StudentForm2(request.POST,instance=student)
-        if form.is_valid():
-            form.save()
-            return redirect('students.listStudent2')
-    form = StudentForm2(instance=student)
-    return render(request,'bookmodule/addStudent.html',{'form':form})
-    
+    if request.user.is_authenticated:
+        student = Student2.objects.get(id=bID)
+        if request.method=='POST':
+            form = StudentForm2(request.POST,instance=student)
+            if form.is_valid():
+                form.save()
+                return redirect('students.listStudent2')
+        form = StudentForm2(instance=student)
+        return render(request,'bookmodule/addStudent.html',{'form':form})
+    else:
+        return redirect(register)      
+        
             
 def deleteStudent2(request,bID):
-    student = Student2.objects.get(id=bID)
-    student.delete()
-    return redirect('students.listStudent2')
+    if request.user.is_authenticated:
+        student = Student2.objects.get(id=bID)
+        student.delete()
+        return redirect('students.listStudent2')
+    else:
+        return redirect(register)      
     
     
     
@@ -276,3 +290,55 @@ def addBookWithCover(request):
         
     form = BookCoverForm(None)
     return render(request,'bookmodule/addbookcover.html',{'form':form})
+    
+
+
+
+def homepage(request):
+    return redirect(listStudent2)
+
+
+
+
+
+def register(request):
+    form =SignUpForm()
+    if request.method=='POST':
+        form=SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            
+            login(request, user)
+            messages.success(request, "You Have Successfully Registered!")
+            return redirect(homepage)
+        else:
+            messages.error(request, form.error_messages)
+    return render(request,'bookmodule/register.html',{'form':form})
+    
+    
+    
+def logoutuser(request):
+    logout(request)
+    messages.success(request,"You have been logged out")
+    return redirect(register)
+
+
+def loginUser(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, "You have successfully logged in!")
+            return redirect(homepage)
+        else:
+            messages.error(request, "Invalid username or password.")
+    return render(request, 'bookmodule/login.html')
+
+
+
+    

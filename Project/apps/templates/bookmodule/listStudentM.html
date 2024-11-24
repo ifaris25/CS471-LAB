@@ -9,6 +9,11 @@
 </head>
 
 <body>
+    
+    {% if user.is_authenticated %}
+    <a href="{% url 'books.logoutuser' %}">Logout</a>
+    {% endif %}
+    <br>
     <a href="{%url 'students.addStudent2'%}" class="button" >Add student</a>
     <br>
     <table>

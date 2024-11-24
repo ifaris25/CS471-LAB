@@ -32,3 +32,6 @@ class Student2(models.Model):
 class BookCover(models.Model):
     title = models.CharField(max_length = 50)
     coverPage = models.ImageField(upload_to='documents/')
+    
+    
+    

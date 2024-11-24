@@ -35,6 +35,13 @@ urlpatterns = [
     path('lab10/deleteStudentM/<bID>', views.deleteStudent2, name= "students.deleteStudent2"),
     path('lab10/editStudentM/<bID>', views.editStudent2, name= "students.editStudent2"),
     path('lab10/addBookWithCover', views.addBookWithCover, name= "books.addBookWithCover"),
+    
+    
+    path('lab11/homepage', views.homepage, name= "books.homepage"),
+    path('lab11/register', views.register, name= "books.register"),
+    path('lab11/logoutuser', views.logoutuser, name= "books.logoutuser"),
+    path('lab11/loginUser', views.loginUser, name= "books.loginUser"),
+    
 
     
 ]
