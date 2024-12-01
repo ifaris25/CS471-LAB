@@ -340,7 +340,23 @@ def loginUser(request):
     return render(request, 'bookmodule/login.html')
 
 
-#
+def lab12task1(request):
+    return render(request,'bookmodule/lab12task1.html')
+
+
+
+def lab12task2(request):
+    return render(request,'bookmodule/lab12task2.html')
+
+
+
+def lab12task3(request):
+    return render(request,'bookmodule/lab12task3.html')
+
+
+
+def lab12task4(request):
+    return render(request,'bookmodule/lab12task4.html')
 
 
     

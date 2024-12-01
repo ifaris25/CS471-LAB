@@ -41,7 +41,15 @@ urlpatterns = [
     path('lab11/register', views.register, name= "books.register"),
     path('lab11/logoutuser', views.logoutuser, name= "books.logoutuser"),
     path('lab11/loginUser', views.loginUser, name= "books.loginUser"),
-    
+    path('lab12/task1', views.lab12task1, name= "books.lab12task1"),
+
+    path('lab12/task2', views.lab12task2, name= "books.lab12task2"),
+
+    path('lab12/task3', views.lab12task3, name= "books.lab12task3"),
+
+    path('lab12/task4', views.lab12task4, name= "books.lab12task4"),
+
+
 
     
 ]
